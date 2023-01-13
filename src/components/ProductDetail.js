@@ -1,10 +1,9 @@
-import Product from "./Product"; 
 import PropTypes from "prop-types"; 
 import React from "react";
 
 function ProductDetail(props){
 
-  const {product, onClickingDelete} = product; 
+  const {product, onClickingDelete} = props; 
 
   return (
     <React.Fragment>

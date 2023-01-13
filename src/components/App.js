@@ -1,12 +1,12 @@
 import React from "react";
 import Header from "./Header";
-import ProductController from "./ProductControl.js";
+import ProductControl from "./ProductControl.js";
 
 function App() {
   return(
     <React.Fragment>
       <Header/>
-      <ProductController/>
+      <ProductControl/>
     </React.Fragment>
   )
 }

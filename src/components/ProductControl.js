@@ -9,7 +9,7 @@ class ProductControl extends React.Component{
   
   constructor(props){
     super(props);
-    this.stae = { 
+    this.state = { 
       formVisibleOnPage: false,
       mainProductList: [], 
       selectedProduct: null,
@@ -18,7 +18,6 @@ class ProductControl extends React.Component{
   }
 
   handleEditClick = () => {
-    console.log("editing reached");
     this.setState({
       editing: true
     });
@@ -52,15 +51,13 @@ class ProductControl extends React.Component{
     });
   }
 
-  handleChangingSelectedProduct = (id) => { 
-    const selectedProduct = this.state.mainProductList.filer(product => product.id === id)[0];
-    this.setState({
-      selectedProduct: selectedProduct
-    })
-  } 
+  handleChangingselectedProduct = (id) => {
+    const selectedProduct = this.state.mainProductList.filter(product => product.id === id)[0];
+    this.setState({selectedProduct: selectedProduct});
+  }
 
   handleClick = () => {
-    if (this.state.selecteddTicker != null){
+    if (this.state.selectedProduct != null){
       this.setState({
         formVisibleOnPage: false,
         selectedProduct: null
@@ -74,7 +71,39 @@ class ProductControl extends React.Component{
 
   render(){ 
     let currentlyVisibleState = null; 
+    let buttonText = null; 
 
+    if (this.state.editing){
+      currentlyVisibleState = <EditProductForm 
+      product = {this.state.selectedProduct}
+      onEditProduct = {this.handleEditingProductInList}
+      />
+    } else if (this.state.selectedProduct != null){
+      currentlyVisibleState = <ProductDetail 
+      product = {this.state.selectedProduct}
+      onClickingDelete = {this.handleDeletingProduct}
+      onClickingEdit = {this.handleEditClick}
+      buttonText = "Return to Product List"
+      />
+    } else if (this.state.formVisibleOnPage){
+      currentlyVisibleState = <NewProductForm 
+      onNewProductCreation= {this.handleAddingNewProductToList} 
+      buttonText = "Return to Product List"
+      />
+    } else {
+      currentlyVisibleState = <ProductList 
+      productList = {this.state.mainProductList}
+      onProductSelection = {this.handleChangingSelectedProduct}
+      />
+      buttonText = "Add Product";
+    }
+
+    return (
+      <React.Fragment>
+        {currentlyVisibleState}
+        <button onClick = {this.handleClick}>{buttonText}</button>
+      </React.Fragment> 
+    )
   }
 
 }

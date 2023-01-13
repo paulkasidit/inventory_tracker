@@ -11,7 +11,7 @@ function NewProductForm(props){
       name: event.target.name.value,
       origin: event.target.origin.value,
       price: event.target.price.value,
-      roast: event.target.issue.value,
+      roast: event.target.roast.value,
       id: v4()
     });
   }
