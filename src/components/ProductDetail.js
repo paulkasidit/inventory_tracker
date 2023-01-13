@@ -1,4 +1,4 @@
-import Product from "product"; 
+import Product from "./Product"; 
 import PropTypes from "prop-types"; 
 import React from "react";
 
