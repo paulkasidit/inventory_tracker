@@ -1,21 +1,17 @@
-import PropTypes from "prop-types"; 
 import React from "react";
+import PropTypes from "prop-types";
 
 function ProductDetail(props){
-
-  const {product, onClickingDelete} = props; 
+  const { product, onClickingDelete } = props; //new code
 
   return (
     <React.Fragment>
-      <h3>Product Details</h3>
-      <h3>{product.name}</h3>
-        <ul>
-          <li>{product.origin}</li>
-          <li>{product.price}</li>
-          <li>{product.roast}</li>
-        </ul>
-        <button onClick = {props.onClickingEdit}>Update Product</button>
-        <button onClick = {() => onClickingDelete(product.id)}>Delete Product</button>
+      <h1>Product Details</h1>
+      <h3>{product.name} - {product.price}</h3>
+      <p><em>{product.origin}</em></p>
+      <p><em>{product.roast}</em></p>
+      <button onClick={ props.onClickingEdit }>Update product</button> { /* new code */ }
+      <button onClick={()=> onClickingDelete(product.id) }>Close product</button> { /* new code */ }
       <hr/>
     </React.Fragment>
   );
@@ -23,8 +19,8 @@ function ProductDetail(props){
 
 ProductDetail.propTypes = {
   product: PropTypes.object,
-  onClickingDelete: PropTypes.func,
+  onClickingDelete: PropTypes.func, // new code
   onClickingEdit: PropTypes.func
-}
+};
 
-export default ProductDetail; 
+export default ProductDetail;
