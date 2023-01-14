@@ -13,6 +13,7 @@ function ProductList(props) {
         origin = {product.origin}
         price = {product.price}
         roast = {product.roast}
+        quantityInPounds = {product.quantityInPounds}
         id = {product.id}
         key = {product.id}
         />

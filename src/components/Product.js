@@ -9,6 +9,7 @@ function Product(props){
         <h3>{props.name} - {props.price}</h3>
         <p><em>{props.price}</em></p>
         <p><em>{props.roast}</em></p>
+        <p><em>Quanity:{props.quantityInPounds} lbs</em></p>
         <hr/>
       </div>
     </React.Fragment>
@@ -20,6 +21,7 @@ Product.propTypes = {
   origin: PropTypes.string,
   price: PropTypes.string,
   roast: PropTypes.string, 
+  quantityInPounds: PropTypes.number,
   whenProductClicked: PropTypes.func
 };
 

@@ -12,7 +12,8 @@ class ProductControl extends React.Component {
       formVisibleOnPage: false,
       mainProductList: [],
       selectedProduct: null,
-      editing: false
+      editing: false,
+      outOfStock: false
     };
   }
 
@@ -40,6 +41,15 @@ class ProductControl extends React.Component {
     });
   }
 
+  handleSellingProduct = (productToBeSold ) => { 
+    this.setState = (prevState => {
+      let productToBeSold  = {...prevState.productToBeSold};
+      productToBeSold.quantityInPounds = productToBeSold.quantityInPounds - 1
+      return {productToBeSold};
+    })
+    console.log(productToBeSold);
+  }
+
   handleAddingNewProductToList = (newProduct) => {
     const newMainProductList = this.state.mainProductList.concat(newProduct);
     this.setState({mainProductList: newMainProductList,
@@ -48,6 +58,7 @@ class ProductControl extends React.Component {
 
   handleChangingSelectedProduct = (id) => {
     const selectedProduct = this.state.mainProductList.filter(product => product.id === id)[0];
+    console.log(selectedProduct);
     this.setState({selectedProduct: selectedProduct});
   }
 
@@ -70,26 +81,26 @@ class ProductControl extends React.Component {
     let buttonText = null; 
 
     if (this.state.editing){
-      currentlyVisibleState = <EditProductForm product = {this.state.selectedProduct}
+      currentlyVisibleState = <EditProductForm 
+      product = {this.state.selectedProduct}
       onEditProduct = {this.handleEditingproductInList}
       />
     }
     else if (this.state.selectedProduct != null) {
       currentlyVisibleState = <ProductDetail product = {this.state.selectedProduct} 
       onClickingDelete = {this.handleDeletingProduct}
-      onClickingEdit = {this.handleEditClick}/>
-      buttonText = "Return to product List";
-      // While our ProductDetail component only takes placeholder data, we will eventually be passing the value of selectedProduct as a prop.
+      onClickingEdit = {this.handleEditClick}
+      onClickingSell = {this.handleSellingProduct}
+      />
+      buttonText = "Return to Product List";
     }
     else if (this.state.formVisibleOnPage) {
-      // This conditional needs to be updated to "else if."
       currentlyVisibleState = <NewProductForm onNewProductCreation = {this.handleAddingNewProductToList}  />;
-      buttonText = "Return to product List";
+      buttonText = "Return to Product List";
     } else {
       currentlyVisibleState = <ProductList productList={this.state.mainProductList} 
       onProductSelection={this.handleChangingSelectedProduct} />;
-      // Because a user will actually be clicking on the product in the product component, we will need to pass our new handleChangingSelectedProduct method as a prop.
-      buttonText = "Add product";
+      buttonText = "Add Product";
     }
 
     return (
@@ -101,5 +112,6 @@ class ProductControl extends React.Component {
   }
   
 }
+
 
 export default ProductControl;
