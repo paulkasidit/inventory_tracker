@@ -13,16 +13,17 @@ class ProductControl extends React.Component {
       mainProductList: [],
       selectedProduct: null,
       editing: false,
-      outOfStock: false
     };
   }
 
   handleEditClick = () => { 
     console.log("handleEditClick reached!")
-    this.setState({editing: true});
+    this.setState({
+      editing: true
+    });
   }
 
-  handleEditingproductInList = (productToEdit) => {
+  handleEditinProductInList = (productToEdit) => {
     const editedMainProductList = this.state.mainProductList
       .filter(product => product.id !== this.state.selectedProduct.id)
       .concat(productToEdit);
@@ -41,26 +42,31 @@ class ProductControl extends React.Component {
     });
   }
 
-  handleSellingProduct = (id) => { 
-    const selectedProduct = this.state.mainProductList.filter(product => product.id === id)[0];
+  handleBuyingProduct = (id) => { 
+    const newMainProductList = this.state.mainProductList;
+    const productToSellIndex = newMainProductList.findIndex(product => product.id === id); 
+    const productQuantityToUpdate =  newMainProductList[productToSellIndex];
+    if (productQuantityToUpdate.quantity > 0){
+      newMainProductList[productToSellIndex].quantity -= 1
+    }
     this.setState({
-      selectedProduct: selectedProduct.quantityInPounds - 1;
+      mainProductList: newMainProductList
     })
-    console.log(this.state.selectedProduct.quantityInPounds);
   }
 
   handleAddingNewProductToList = (newProduct) => {
     const newMainProductList = this.state.mainProductList.concat(newProduct);
     this.setState({
       mainProductList: newMainProductList,
-      formVisibleOnPage: false 
+      formVisibleOnPage: false
     });
   }
 
   handleChangingSelectedProduct = (id) => {
     const selectedProduct = this.state.mainProductList.filter(product => product.id === id)[0];
-    console.log(selectedProduct);
-    this.setState({selectedProduct: selectedProduct});
+    this.setState({
+      selectedProduct: selectedProduct
+    });
   }
 
   handleClick = () => {
@@ -84,12 +90,11 @@ class ProductControl extends React.Component {
     if (this.state.editing){
       currentlyVisibleState = <EditProductForm 
       product = {this.state.selectedProduct}
-      onEditProduct = {this.handleEditingproductInList}
+      onEditProduct = {this.handleEditinProductInList}
       />
     }
     else if (this.state.selectedProduct != null) {
       currentlyVisibleState = <ProductDetail product = {this.state.selectedProduct} 
-      onClickingSell = {this.handleSellingProduct}
       onClickingDelete = {this.handleDeletingProduct}
       onClickingEdit = {this.handleEditClick}
       />
@@ -99,8 +104,10 @@ class ProductControl extends React.Component {
       currentlyVisibleState = <NewProductForm onNewProductCreation = {this.handleAddingNewProductToList}  />;
       buttonText = "Return to Product List";
     } else {
-      currentlyVisibleState = <ProductList productList={this.state.mainProductList} 
-      onProductSelection={this.handleChangingSelectedProduct} />;
+      currentlyVisibleState = <ProductList 
+      productList={this.state.mainProductList} 
+      onProductSelection={this.handleChangingSelectedProduct}
+      onBuyingProduct = {this.handleBuyingProduct} />;
       buttonText = "Add Product";
     }
 

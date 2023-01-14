@@ -13,7 +13,8 @@ function ProductList(props) {
         origin = {product.origin}
         price = {product.price}
         roast = {product.roast}
-        quantityInPounds = {product.quantityInPounds}
+        quantity = {product.quantity}
+        onBuy = {props.onBuyingProduct} 
         id = {product.id}
         key = {product.id}
         />
@@ -24,7 +25,8 @@ function ProductList(props) {
 
 ProductList.propTypes = {
   productList: PropTypes.array,
-  onProductSelection: PropTypes.func
+  onProductSelection: PropTypes.func,
+  onBuyingProduct: PropTypes.func
 };
 
 export default ProductList;

@@ -12,7 +12,7 @@ function NewProductForm(props){
       origin: event.target.origin.value,
       price: event.target.price.value,
       roast: event.target.roast.value,
-      quantityInPounds: 130,
+      quantity: 1,
       id: v4()
     });
   }

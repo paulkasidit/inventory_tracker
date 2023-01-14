@@ -1,4 +1,3 @@
-
 import React from "react";
 import PropTypes from "prop-types";
 
@@ -9,8 +8,15 @@ function Product(props){
         <h3>{props.name} - {props.price}</h3>
         <p><em>{props.price}</em></p>
         <p><em>{props.roast}</em></p>
-        <p><em>Quanity:{props.quantityInPounds} lbs</em></p>
+          {props.quantity === 0 
+          ?<p>Out of Stock</p>
+          :<p>{"Quantity: " + props.quantity + "lbs"}</p>
+          }
         <hr/>
+        {props.quantity === 0
+          ?<p></p>
+          :<button onClick = {() => props.onBuy(props.id)}>Buy</button>
+        }
       </div>
     </React.Fragment>
   );
@@ -21,8 +27,9 @@ Product.propTypes = {
   origin: PropTypes.string,
   price: PropTypes.string,
   roast: PropTypes.string, 
-  quantityInPounds: PropTypes.number,
-  whenProductClicked: PropTypes.func
+  quantity: PropTypes.number,
+  whenProductClicked: PropTypes.func,
+  onBuy: PropTypes.func
 };
 
 
