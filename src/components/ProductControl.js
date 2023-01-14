@@ -41,19 +41,20 @@ class ProductControl extends React.Component {
     });
   }
 
-  handleSellingProduct = (productToBeSold ) => { 
-    this.setState = (prevState => {
-      let productToBeSold  = {...prevState.productToBeSold};
-      productToBeSold.quantityInPounds = productToBeSold.quantityInPounds - 1
-      return {productToBeSold};
+  handleSellingProduct = (id) => { 
+    const selectedProduct = this.state.mainProductList.filter(product => product.id === id)[0];
+    this.setState({
+      selectedProduct: selectedProduct.quantityInPounds - 1;
     })
-    console.log(productToBeSold);
+    console.log(this.state.selectedProduct.quantityInPounds);
   }
 
   handleAddingNewProductToList = (newProduct) => {
     const newMainProductList = this.state.mainProductList.concat(newProduct);
-    this.setState({mainProductList: newMainProductList,
-                  formVisibleOnPage: false });
+    this.setState({
+      mainProductList: newMainProductList,
+      formVisibleOnPage: false 
+    });
   }
 
   handleChangingSelectedProduct = (id) => {
@@ -88,9 +89,9 @@ class ProductControl extends React.Component {
     }
     else if (this.state.selectedProduct != null) {
       currentlyVisibleState = <ProductDetail product = {this.state.selectedProduct} 
+      onClickingSell = {this.handleSellingProduct}
       onClickingDelete = {this.handleDeletingProduct}
       onClickingEdit = {this.handleEditClick}
-      onClickingSell = {this.handleSellingProduct}
       />
       buttonText = "Return to Product List";
     }
