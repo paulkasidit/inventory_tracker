@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.bbc2691e.css",
+    "main.js": "/static/js/main.f1ba0247.js",
+    "static/media/buzzlogo.png": "/static/media/buzzlogo.2b996465fe55720cda0c.png",
+    "index.html": "/index.html",
+    "main.bbc2691e.css.map": "/static/css/main.bbc2691e.css.map",
+    "main.f1ba0247.js.map": "/static/js/main.f1ba0247.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bbc2691e.css",
+    "static/js/main.f1ba0247.js"
+  ]
+}
