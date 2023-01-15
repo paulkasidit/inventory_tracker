@@ -1,4 +1,4 @@
-#### Inventory Checker
+#### Inventory Tracker
 
 ## By
 
