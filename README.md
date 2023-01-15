@@ -12,6 +12,8 @@
 * Bulma
 * NPM
 
+## Component Diagram 
+![alt text] ()
 
 ## Description
 
