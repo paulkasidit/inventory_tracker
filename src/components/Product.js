@@ -6,6 +6,7 @@ function Product(props){
     <React.Fragment>
       <div onClick = {() => props.whenProductClicked(props.id)}>
         <h3>{props.name} - {props.price}</h3>
+        <p><em>{props.origin}</em></p>
         <p><em>{(Math.round(props.price * 100) / 100).toFixed(2)}</em></p>
         <p><em>{props.roast}</em></p>
           {props.quantity === 0 

@@ -8,24 +8,26 @@ function ProductList(props) {
     <React.Fragment>
       <hr/>
         <div class = "columns is-centered">
-          {props.productList.map((product) => 
-            <div class = "column">
+          <div class = "column">
               <div class = "box">
-                <Product whenProductClicked = {props.onProductSelection}
-                name = {product.name}
-                origin = {product.origin}
-                price = {product.price}
-                roast = {product.roast}
-                quantity = {product.quantity}
-                onBuy = {props.onBuyingProduct} 
-                id = {product.id}
-                key = {product.id}
-                />
-              </div>
+                  {props.productList.length > 0       
+                  ? props.productList.map((product) => 
+                        <Product whenProductClicked = {props.onProductSelection}
+                        name = {product.name}
+                        origin = {product.origin}
+                        price = {product.price}
+                        roast = {product.roast}
+                        quantity = {product.quantity}
+                        onBuy = {props.onBuyingProduct} 
+                        id = {product.id}
+                        key = {product.id}
+                        />
+                  )
+                :<p>Add some new products</p>
+                  }
+             </div>
             </div>
-          )}
-        </div>
-
+          </div>
     </React.Fragment>
   )
 }

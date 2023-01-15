@@ -103,7 +103,7 @@ class ProductControl extends React.Component {
     else if (this.state.formVisibleOnPage) {
       currentlyVisibleState = <NewProductForm onNewProductCreation = {this.handleAddingNewProductToList}  />;
       buttonText = "Return to Product List";
-    } else {
+    } else{
       currentlyVisibleState = <ProductList 
       productList={this.state.mainProductList} 
       onProductSelection={this.handleChangingSelectedProduct}

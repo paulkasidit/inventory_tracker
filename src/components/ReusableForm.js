@@ -18,17 +18,14 @@ function ReusableForm(props){
                 />
               </div>
             </div>
+
             <label class = "label">Product Origin</label>
-            <div class = "field">
-              <div class = "control">
-                <input
-                class = "input"
-                type = "text"
-                name = "origin"
-                placeholder="Product Origin"
-                />
-              </div>
-            </div>
+            <select name = "origin">
+              <option value = "Brazil">Brazil</option>
+              <option value = "Ethiopia">Ethiopia</option>
+              <option value = "Kenya">Kenya</option>
+            </select>
+
             <label class = "label">Product Price</label>
             <div class = "field">
               <div class = "control">
@@ -40,48 +37,20 @@ function ReusableForm(props){
                 />
               </div>
             </div>
+            
             <label class = "label">Product Roast</label>
-            <div class = "field">
-              <div class = "control">
-                <input
-                class = "input"
-                type = "text"
-                name = "roast"
-                placeholder="Product Roast"
-                />
-              </div>
-            </div>
+            <select name = "roast">
+              <option value = "Light">Light Roast</option>
+              <option value = "Medium">Medium Roast</option>
+              <option value = "Dark">Dark Roast</option>
+            </select>
+
             <button class = "button is-success is outlined" type = "submit">
               {props.buttonText}
             </button>  
           </form>
       </div>
-
       
-
-      {/* <form onSubmit={props.formSubmissionHandler}>
-        <input
-          type = "text"
-          name = "name"
-          placeholder="Product Name"
-        />
-        <input
-          type = "text"
-          name = "origin"
-          placeholder="Product Origin"
-        />
-        <input
-          type = "text"
-          name = "price"
-          placeholder="Product Price"
-        />
-        <input
-          type = "text"
-          name = "roast"
-          placeholder="Product Roast"
-        />
-        <button type = "submit">{props.buttonText}</button>
-      </form> */}
     </React.Fragment>
   )
 }
