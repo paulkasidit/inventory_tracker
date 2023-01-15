@@ -92,6 +92,7 @@ class ProductControl extends React.Component {
       product = {this.state.selectedProduct}
       onEditProduct = {this.handleEditinProductInList}
       />
+      buttonText = "Return to Product List";
     }
     else if (this.state.selectedProduct != null) {
       currentlyVisibleState = <ProductDetail product = {this.state.selectedProduct} 
@@ -113,8 +114,18 @@ class ProductControl extends React.Component {
 
     return (
       <React.Fragment>
-        <button class = "button is-link" onClick={this.handleClick}>{buttonText}</button>
-        {currentlyVisibleState}
+        <div class = "columns is-centered">
+          <div class = "column is-one-quarter">
+              <div class = "box">
+                <button class = "button is-link" onClick={this.handleClick}>{buttonText}</button>
+              </div>
+          </div>
+          <div class = "column is-half">
+            <div class = "box">
+              {currentlyVisibleState}
+            </div>
+          </div>
+        </div>
       </React.Fragment>
     );
   }

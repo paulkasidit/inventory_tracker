@@ -5,10 +5,10 @@ function Product(props){
   return (
     <React.Fragment>
       <div onClick = {() => props.whenProductClicked(props.id)}>
-        <h3>{props.name} - {props.price}</h3>
-        <p><em>{props.origin}</em></p>
-        <p><em>{(Math.round(props.price * 100) / 100).toFixed(2)}</em></p>
-        <p><em>{props.roast}</em></p>
+        <h3>{"Name: " + props.name}</h3>
+        <p><em>{"Origin: " + props.origin}</em></p>
+        <p><em>{"Price: $" + (Math.round(props.price * 100) / 100).toFixed(2)}</em></p>
+        <p><em>{"Roast: " + props.roast}</em></p>
           {props.quantity === 0 
           ?<p>Out of Stock</p>
           :<p>{"Quantity: " + props.quantity + " lbs"}</p>

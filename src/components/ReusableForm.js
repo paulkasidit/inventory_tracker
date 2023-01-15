@@ -6,7 +6,8 @@ function ReusableForm(props){
     <React.Fragment>
 
       <div class = "columns is-centered is-two-thirds">
-          <form onSubmit={props.formSubmissionHandler}>
+        <div class = "column">
+        <form onSubmit={props.formSubmissionHandler}>
             <label class = "label">Product Name</label>
             <div class = "field">
               <div class = "control">
@@ -19,13 +20,6 @@ function ReusableForm(props){
               </div>
             </div>
 
-            <label class = "label">Product Origin</label>
-            <select name = "origin">
-              <option value = "Brazil">Brazil</option>
-              <option value = "Ethiopia">Ethiopia</option>
-              <option value = "Kenya">Kenya</option>
-            </select>
-
             <label class = "label">Product Price</label>
             <div class = "field">
               <div class = "control">
@@ -37,18 +31,28 @@ function ReusableForm(props){
                 />
               </div>
             </div>
-            
-            <label class = "label">Product Roast</label>
-            <select name = "roast">
-              <option value = "Light">Light Roast</option>
-              <option value = "Medium">Medium Roast</option>
-              <option value = "Dark">Dark Roast</option>
+
+            <label class = "label">Product Origin</label>
+            <select name = "origin">
+              <option value = "Brazil">Brazil</option>
+              <option value = "Ethiopia">Ethiopia</option>
+              <option value = "Kenya">Kenya</option>
             </select>
 
-            <button class = "button is-success is outlined" type = "submit">
-              {props.buttonText}
-            </button>  
+            <label class = "label">Product Roast</label>
+            <select name = "roast">
+              <option value = "Light Roast">Light Roast</option>
+              <option value = "Medium Roast">Medium Roast</option>
+              <option value = "Dark Roast">Dark Roast</option>
+            </select>
+            <div class = "column">
+              <button class = "button is-success is outlined" type = "submit">
+                {props.buttonText}
+              </button>
+            </div>
           </form>
+        </div>
+
       </div>
       
     </React.Fragment>

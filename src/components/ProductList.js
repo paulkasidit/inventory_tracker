@@ -9,9 +9,10 @@ function ProductList(props) {
       <hr/>
         <div class = "columns is-centered">
           <div class = "column">
-              <div class = "box">
+                  <h1 class = "title is-1">Product List</h1>
                   {props.productList.length > 0       
                   ? props.productList.map((product) => 
+                    <div class = "box">
                         <Product whenProductClicked = {props.onProductSelection}
                         name = {product.name}
                         origin = {product.origin}
@@ -20,13 +21,13 @@ function ProductList(props) {
                         quantity = {product.quantity}
                         onBuy = {props.onBuyingProduct} 
                         id = {product.id}
-                        key = {product.id}
+                        key = {product.id}      
                         />
+                    </div>
                   )
-                :<p>Add some new products</p>
+                :<p>Add some new products here.</p>
                   }
              </div>
-            </div>
           </div>
     </React.Fragment>
   )

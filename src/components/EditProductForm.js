@@ -13,6 +13,7 @@ function EditProductForm(props){
       origin: event.target.origin.value,
       price: event.target.price.value, 
       roast: event.target.roast.value,
+      quantity: product.quantity,
       id: product.id
     });
   }

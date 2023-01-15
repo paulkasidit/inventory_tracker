@@ -8,7 +8,7 @@ function ProductDetail(props){
     <React.Fragment>
     <div class = "box">
       <h1 class = "title is-1">Product Details</h1>
-        <h3 class = "title is-4">{product.name} - {product.price}</h3>
+        <h3 class = "title is-4">{"Name: " + product.name} | {"Price: $" + (Math.round(product.price * 100) / 100).toFixed(2)}</h3>
         <div class = "box">
           <p><em>Origin:{product.origin}</em></p>
           <p><em>Roast:{product.roast}</em></p>
