@@ -8,8 +8,10 @@
 
 * JavaScript
 * React 
+* Redux
 * Bulma
 * NPM
+
 
 ## Description
 
