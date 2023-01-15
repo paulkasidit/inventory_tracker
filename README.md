@@ -13,7 +13,7 @@
 * NPM
 
 ## Component Diagram 
-![alt text] (https://github.com/paulkasidit/inventory_tracker/blob/main/Component%20Diagram.png)
+![Alt text] (Component Diagram.png)
 
 ## Description
 
