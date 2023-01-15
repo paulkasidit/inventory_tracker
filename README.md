@@ -7,15 +7,13 @@
 ## Technologies Used
 
 * JavaScript
-* Webpack
-* ESLint
-* Babel
-* Jest
-* JQuery 
+* React 
+* Bulma
+* NPM
 
 ## Description
 
-This application is used for calculating the rates of five currencies from USD. 
+This website was built for clients to manage their inventory. 
 
 - You can the webpage directly by clicking [here]()
 
