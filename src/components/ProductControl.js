@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import NewProductForm from './NewProductForm';
 import EditProductForm from './EditProductForm'
 import ProductDetail from './ProductDetail';
@@ -10,7 +11,6 @@ class ProductControl extends React.Component {
     super(props);
     this.state = {
       formVisibleOnPage: false,
-      mainProductList: [],
       selectedProduct: null,
       editing: false,
     };
@@ -24,20 +24,31 @@ class ProductControl extends React.Component {
   }
 
   handleEditinProductInList = (productToEdit) => {
-    const editedMainProductList = this.state.mainProductList
-      .filter(product => product.id !== this.state.selectedProduct.id)
-      .concat(productToEdit);
+    const { dispatch } = this.props; 
+    const {id, name, price, origin, roast} = productToEdit;
+    const action = {
+      type: 'ADD_PRODUCT',
+      id: id,
+      name: name, 
+      price: price,
+      origin: origin,
+      roast: roast
+    }
+    dispatch(action);
     this.setState({
-        mainProductList: editedMainProductList,
-        editing: false,
-        selectedProduct: null
-      });
+      editing: false, 
+      selectedProduct: null
+    });
   }
 
   handleDeletingProduct = (id) => {
-    const newMainProductList = this.state.mainProductList.filter(product => product.id !== id);
+    const { dispatch } = this.props; 
+    const action = { 
+      type: 'DELETE_PRODUCT',
+      id: id
+    }
+    dispatch(action);
     this.setState({
-      mainProductList: newMainProductList,
       selectedProduct: null
     });
   }
@@ -54,10 +65,19 @@ class ProductControl extends React.Component {
     })
   }
 
-  handleAddingNewProductToList = (newProduct) => {
-    const newMainProductList = this.state.mainProductList.concat(newProduct);
+  handleAddingNewProductToList = (newProduct) => {   
+    const {dispatch} = this.props; 
+    const {id, name, price, origin, roast} = newProduct;  
+    const action = {
+      type: 'ADD_PRODUCT',
+      id: id,
+      name: name, 
+      price: price,
+      origin: origin,
+      roast: roast
+    }
+    dispatch(action);
     this.setState({
-      mainProductList: newMainProductList,
       formVisibleOnPage: false
     });
   }
@@ -132,5 +152,6 @@ class ProductControl extends React.Component {
   
 }
 
+ProductControl = connect()(ProductControl);
 
 export default ProductControl;

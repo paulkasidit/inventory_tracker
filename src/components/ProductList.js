@@ -10,7 +10,7 @@ function ProductList(props) {
         <div class = "columns is-centered">
           <div class = "column">
                   <h1 class = "title is-1">Product List</h1>
-                  {props.productList.length > 0       
+                  {props.length > 0       
                   ? props.productList.map((product) => 
                     <div class = "box">
                         <Product whenProductClicked = {props.onProductSelection}
