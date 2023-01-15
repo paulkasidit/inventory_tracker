@@ -13,7 +13,7 @@
 * NPM
 
 ## Component Diagram 
-![Alt text] (Component Diagram.png)
+![Alt text] (public/Component Diagram.png)
 
 ## Description
 
