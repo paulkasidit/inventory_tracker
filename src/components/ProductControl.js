@@ -113,8 +113,8 @@ class ProductControl extends React.Component {
 
     return (
       <React.Fragment>
+        <button class = "button is-link" onClick={this.handleClick}>{buttonText}</button>
         {currentlyVisibleState}
-        <button onClick={this.handleClick}>{buttonText}</button>
       </React.Fragment>
     );
   }

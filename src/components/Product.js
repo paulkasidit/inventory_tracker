@@ -6,16 +6,16 @@ function Product(props){
     <React.Fragment>
       <div onClick = {() => props.whenProductClicked(props.id)}>
         <h3>{props.name} - {props.price}</h3>
-        <p><em>{props.price}</em></p>
+        <p><em>{(Math.round(props.price * 100) / 100).toFixed(2)}</em></p>
         <p><em>{props.roast}</em></p>
           {props.quantity === 0 
           ?<p>Out of Stock</p>
-          :<p>{"Quantity: " + props.quantity + "lbs"}</p>
+          :<p>{"Quantity: " + props.quantity + " lbs"}</p>
           }
         <hr/>
         {props.quantity === 0
           ?<p></p>
-          :<button onClick = {() => props.onBuy(props.id)}>Buy</button>
+          :<button class = "button is-success" onClick = {() => props.onBuy(props.id)}>Buy</button>
         }
       </div>
     </React.Fragment>
