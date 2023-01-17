@@ -1,6 +1,6 @@
 const reducer = (state = {}, action) => {
   
-  const {name , origin, price, roast, id} = action;
+  const {name , origin, price, roast, quantity, id} = action;
   
   switch (action.type) {
 
@@ -11,6 +11,7 @@ const reducer = (state = {}, action) => {
           origin: origin, 
           price: price, 
           roast: roast,
+          quantity: quantity,
           id: id
         }
       });
