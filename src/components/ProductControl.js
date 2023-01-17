@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import NewProductForm from './NewProductForm';
 import EditProductForm from './EditProductForm'
@@ -53,9 +54,21 @@ class ProductControl extends React.Component {
     });
   }
 
+  // handleBuyingProduct = (id) => { 
+  //   const newMainProductList = this.state.mainProductList;
+  //   const productToSellIndex = newMainProductList.findIndex(product => product.id === id); 
+  //   const productQuantityToUpdate =  newMainProductList[productToSellIndex];
+  //   if (productQuantityToUpdate.quantity > 0){
+  //     newMainProductList[productToSellIndex].quantity -= 1
+  //   }
+  //   this.setState({
+  //     mainProductList: newMainProductList
+  //   })
+  // }
+
   handleBuyingProduct = (id) => { 
     const newMainProductList = this.state.mainProductList;
-    const productToSellIndex = newMainProductList.findIndex(product => product.id === id); 
+    const productToSellIndex = newMainProductList[id]; 
     const productQuantityToUpdate =  newMainProductList[productToSellIndex];
     if (productQuantityToUpdate.quantity > 0){
       newMainProductList[productToSellIndex].quantity -= 1
@@ -64,7 +77,7 @@ class ProductControl extends React.Component {
       mainProductList: newMainProductList
     })
   }
-
+  
   handleAddingNewProductToList = (newProduct) => {   
     const {dispatch} = this.props; 
     const {id, name, price, origin, roast} = newProduct;  
@@ -82,8 +95,15 @@ class ProductControl extends React.Component {
     });
   }
 
+  // handleChangingSelectedProduct = (id) => {
+  //   const selectedProduct = this.state.mainProductList.filter(product => product.id === id)[0];
+  //   this.setState({
+  //     selectedProduct: selectedProduct
+  //   });
+  // }
+
   handleChangingSelectedProduct = (id) => {
-    const selectedProduct = this.state.mainProductList.filter(product => product.id === id)[0];
+    const selectedProduct = this.props.mainProductList[id];
     this.setState({
       selectedProduct: selectedProduct
     });
@@ -126,7 +146,7 @@ class ProductControl extends React.Component {
       buttonText = "Return to Product List";
     } else{
       currentlyVisibleState = <ProductList 
-      productList={this.state.mainProductList} 
+      productList={this.props.mainProductList} 
       onProductSelection={this.handleChangingSelectedProduct}
       onBuyingProduct = {this.handleBuyingProduct} />;
       buttonText = "Add Product";
@@ -149,9 +169,18 @@ class ProductControl extends React.Component {
       </React.Fragment>
     );
   }
-  
 }
 
-ProductControl = connect()(ProductControl);
+ProductControl.propTypes = {
+  mainProductList: PropTypes.object
+};
+
+const mapStateToProps = state => {
+  return {
+    mainProductList: state
+  }
+}
+
+ProductControl = connect(mapStateToProps)(ProductControl);
 
 export default ProductControl;
