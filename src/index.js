@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from "react-dom/client";
 import { createStore } from 'redux';
-import reducer from './reducers/product-list-reducer'
+import rootReducer from './reducers/index';
 import { Provider } from 'react-redux'; 
 // Bootstrap CSS
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -11,7 +11,7 @@ import "./index.css";
 import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
 
-const store = createStore(reducer); 
+const store = createStore(rootReducer); 
 
 store.subscribe(() => 
   console.log(store.getState())

@@ -11,9 +11,8 @@ class ProductControl extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      formVisibleOnPage: false,
       selectedProduct: null,
-      editing: false,
+      editing: false
     };
   }
 
@@ -83,9 +82,10 @@ class ProductControl extends React.Component {
       roast: roast,
     }
     dispatch(action);
-    this.setState({
-      formVisibleOnPage: false
-    });
+    const action2 = { 
+      type: 'TOGGLE_FORM'
+    }
+    dispatch(action2);
   }
 
   handleChangingSelectedProduct = (id) => {
@@ -98,13 +98,14 @@ class ProductControl extends React.Component {
   handleClick = () => {
     if (this.state.selectedProduct != null) {
       this.setState({
-        formVisibleOnPage: false,
         selectedProduct: null
       });
     } else {
-      this.setState(prevState => ({
-        formVisibleOnPage: !prevState.formVisibleOnPage,
-      }));
+      const { dispatch } = this.props; 
+      const action = {
+        type: 'TOGGLE_FORM'
+      }
+      dispatch(action);
     }
   }
 
@@ -127,7 +128,7 @@ class ProductControl extends React.Component {
       />
       buttonText = "Return to Product List";
     }
-    else if (this.state.formVisibleOnPage) {
+    else if (this.props.formVisibleOnPage) {
       currentlyVisibleState = <NewProductForm onNewProductCreation = {this.handleAddingNewProductToList}  />;
       buttonText = "Return to Product List";
     } else{
@@ -158,12 +159,14 @@ class ProductControl extends React.Component {
 }
 
 ProductControl.propTypes = {
-  mainProductList: PropTypes.object
+  mainProductList: PropTypes.object,
+  formVisibleOnPage: PropTypes.bool
 };
 
 const mapStateToProps = state => {
   return {
-    mainProductList: state
+    mainProductList: state.mainProductList,
+    formVisibleOnPage: state.formVisibleOnPage
   }
 }
 
