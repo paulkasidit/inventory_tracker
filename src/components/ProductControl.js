@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import * as a from './../actions';
 import { connect } from 'react-redux';
 import NewProductForm from './NewProductForm';
 import EditProductForm from './EditProductForm'
@@ -16,24 +17,24 @@ class ProductControl extends React.Component {
     };
   }
 
-  handleEditClick = () => { 
-    console.log("handleEditClick reached!")
-    this.setState({
-      editing: true
-    });
-  }
-
   handleEditinProductInList = (productToEdit) => {
+    // const { dispatch } = this.props; 
+    // const {id, name, price, origin, roast} = productToEdit;
+    // const action = {
+    //   type: 'ADD_PRODUCT',
+    //   id: id,
+    //   name: name, 
+    //   price: price,
+    //   origin: origin,
+    //   roast: roast
+    // }
+    // dispatch(action);
+    // this.setState({
+    //   editing: false, 
+    //   selectedProduct: null
+    // });
     const { dispatch } = this.props; 
-    const {id, name, price, origin, roast} = productToEdit;
-    const action = {
-      type: 'ADD_PRODUCT',
-      id: id,
-      name: name, 
-      price: price,
-      origin: origin,
-      roast: roast
-    }
+    const action  = a.addProduct(productToEdit);
     dispatch(action);
     this.setState({
       editing: false, 
@@ -42,15 +43,21 @@ class ProductControl extends React.Component {
   }
 
   handleDeletingProduct = (id) => {
+    // const { dispatch } = this.props; 
+    // const action = { 
+    //   type: 'DELETE_PRODUCT',
+    //   id: id
+    // }
+    // dispatch(action);
+    // this.setState({
+    //   selectedProduct: null
+    // });
     const { dispatch } = this.props; 
-    const action = { 
-      type: 'DELETE_PRODUCT',
-      id: id
-    }
+    const action = a.deleteProduct(id);
     dispatch(action);
     this.setState({
       selectedProduct: null
-    });
+    })
   }
 
   handleBuyingProduct = (id) => {  
@@ -70,21 +77,26 @@ class ProductControl extends React.Component {
   }
   
   handleAddingNewProductToList = (newProduct) => {   
-    const {dispatch} = this.props; 
-    const {id, name, price, origin, quantity, roast} = newProduct;  
-    const action = {
-      type: 'ADD_PRODUCT',
-      id: id,
-      name: name, 
-      price: price,
-      origin: origin,
-      quantity: quantity,
-      roast: roast,
-    }
+    // const {dispatch} = this.props; 
+    // const {id, name, price, origin, quantity, roast} = newProduct;  
+    // const action = {
+    //   type: 'ADD_PRODUCT',
+    //   id: id,
+    //   name: name, 
+    //   price: price,
+    //   origin: origin,
+    //   quantity: quantity,
+    //   roast: roast,
+    // }
+    // dispatch(action);
+    // const action2 = { 
+    //   type: 'TOGGLE_FORM'
+    // }
+    // dispatch(action2);
+    const { dispatch } = this.props; 
+    const action = a.addProduct(newProduct);
     dispatch(action);
-    const action2 = { 
-      type: 'TOGGLE_FORM'
-    }
+    const action2 = a.toggleForm();
     dispatch(action2);
   }
 
@@ -102,9 +114,7 @@ class ProductControl extends React.Component {
       });
     } else {
       const { dispatch } = this.props; 
-      const action = {
-        type: 'TOGGLE_FORM'
-      }
+      const action = a.toggleForm()
       dispatch(action);
     }
   }

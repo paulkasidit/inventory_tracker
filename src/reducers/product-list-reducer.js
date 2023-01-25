@@ -1,10 +1,12 @@
+import * as c from './../actions/ActionTypes';
+
 const reducer = (state = {}, action) => {
   
   const {name , origin, price, roast, quantity, id} = action;
   
   switch (action.type) {
 
-    case 'ADD_PRODUCT':
+    case c.ADD_PRODUCT:
       return Object.assign({}, state, {
         [id]:{ 
           name: name,
@@ -15,7 +17,7 @@ const reducer = (state = {}, action) => {
           id: id
         }
       });
-    case 'DELETE_PRODUCT':
+    case c.DELETE_PRODUCT:
       let newState = {...state};
       delete newState[id];
       return newState; 

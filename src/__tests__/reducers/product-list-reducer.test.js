@@ -1,4 +1,5 @@
 import ProductListReducer from '../../reducers/product-list-reducer';
+import * as c from './../../actions/ActionTypes';
 
 describe('ProductListReducer', () => {
 
@@ -31,7 +32,7 @@ describe('ProductListReducer', () => {
     const {name , origin, price, roast, id} = productData;
     
     action = {
-      type: "ADD_PRODUCT", 
+      type: c.ADD_PRODUCT, 
       name: name,
       origin: origin, 
       price: price, 
@@ -57,7 +58,7 @@ describe('ProductListReducer', () => {
     
     //adding original unaltered product to list
     action = {
-      type: "ADD_PRODUCT", 
+      type: c.ADD_PRODUCT, 
       name: name,
       origin: origin, 
       price: price, 
@@ -67,7 +68,7 @@ describe('ProductListReducer', () => {
 
     //updating product data at product with same id
     action = {
-      type: "ADD_PRODUCT", 
+      type: c.ADD_PRODUCT, 
       name: "Jamaica Blue Roast",
       origin: origin, 
       price: price, 
@@ -93,7 +94,7 @@ describe('ProductListReducer', () => {
 
   test("Should successfuly delete a product", () => {
     action = {
-      type: "DELETE_PRODUCT",
+      type: c.DELETE_PRODUCT,
       id: 1
     };
     expect(ProductListReducer(currentState,action)).toEqual({
