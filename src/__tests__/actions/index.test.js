@@ -1,10 +1,11 @@
 import * as actions from './../../actions';
+import * as c from './../../actions/ActionTypes';
 
 describe('Inventory Tracker actions', () => {
 
   it('deleteTicket should create DELETE_TICKET action', () => {
     expect(actions.deleteProduct(1)).toEqual({
-      type: 'DELETE_PRODUCT',
+      type: c.DELETE_PRODUCT,
       id: 1
     });
   });
@@ -17,7 +18,7 @@ describe('Inventory Tracker actions', () => {
       roast: "Dark Roast",
       id: 1
     })).toEqual({
-      type: 'ADD_PRODUCT',
+      type: c.ADD_PRODUCT,
       name: "Jamaica Blue",
       origin: "Australia",
       price: 3.00,
