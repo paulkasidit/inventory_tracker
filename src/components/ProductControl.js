@@ -1,4 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import * as a from './../actions';
+import { connect } from 'react-redux';
 import NewProductForm from './NewProductForm';
 import EditProductForm from './EditProductForm'
 import ProductDetail from './ProductDetail';
@@ -9,61 +12,96 @@ class ProductControl extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      formVisibleOnPage: false,
-      mainProductList: [],
       selectedProduct: null,
-      editing: false,
+      editing: false
     };
   }
 
-  handleEditClick = () => { 
-    console.log("handleEditClick reached!")
-    this.setState({
-      editing: true
-    });
-  }
-
   handleEditinProductInList = (productToEdit) => {
-    const editedMainProductList = this.state.mainProductList
-      .filter(product => product.id !== this.state.selectedProduct.id)
-      .concat(productToEdit);
+    // const { dispatch } = this.props; 
+    // const {id, name, price, origin, roast} = productToEdit;
+    // const action = {
+    //   type: 'ADD_PRODUCT',
+    //   id: id,
+    //   name: name, 
+    //   price: price,
+    //   origin: origin,
+    //   roast: roast
+    // }
+    // dispatch(action);
+    // this.setState({
+    //   editing: false, 
+    //   selectedProduct: null
+    // });
+    const { dispatch } = this.props; 
+    const action  = a.addProduct(productToEdit);
+    dispatch(action);
     this.setState({
-        mainProductList: editedMainProductList,
-        editing: false,
-        selectedProduct: null
-      });
-  }
-
-  handleDeletingProduct = (id) => {
-    const newMainProductList = this.state.mainProductList.filter(product => product.id !== id);
-    this.setState({
-      mainProductList: newMainProductList,
+      editing: false, 
       selectedProduct: null
     });
   }
 
-  handleBuyingProduct = (id) => { 
-    const newMainProductList = this.state.mainProductList;
-    const productToSellIndex = newMainProductList.findIndex(product => product.id === id); 
-    const productQuantityToUpdate =  newMainProductList[productToSellIndex];
-    if (productQuantityToUpdate.quantity > 0){
-      newMainProductList[productToSellIndex].quantity -= 1
-    }
+  handleDeletingProduct = (id) => {
+    // const { dispatch } = this.props; 
+    // const action = { 
+    //   type: 'DELETE_PRODUCT',
+    //   id: id
+    // }
+    // dispatch(action);
+    // this.setState({
+    //   selectedProduct: null
+    // });
+    const { dispatch } = this.props; 
+    const action = a.deleteProduct(id);
+    dispatch(action);
     this.setState({
-      mainProductList: newMainProductList
+      selectedProduct: null
     })
   }
 
-  handleAddingNewProductToList = (newProduct) => {
-    const newMainProductList = this.state.mainProductList.concat(newProduct);
-    this.setState({
-      mainProductList: newMainProductList,
-      formVisibleOnPage: false
-    });
+  handleBuyingProduct = (id) => {  
+    const selectedProduct = this.props.mainProductList[id];
+    const { dispatch } = this.props;  
+    const {name, price, origin, quantity, roast} = selectedProduct;
+    const action = {
+      type: 'ADD_PRODUCT',
+      id: id,
+      name: name, 
+      price: price,
+      origin: origin,
+      quantity: quantity > 0 ? quantity - 1 : quantity,
+      roast: roast
+    }
+    dispatch(action); 
+  }
+  
+  handleAddingNewProductToList = (newProduct) => {   
+    // const {dispatch} = this.props; 
+    // const {id, name, price, origin, quantity, roast} = newProduct;  
+    // const action = {
+    //   type: 'ADD_PRODUCT',
+    //   id: id,
+    //   name: name, 
+    //   price: price,
+    //   origin: origin,
+    //   quantity: quantity,
+    //   roast: roast,
+    // }
+    // dispatch(action);
+    // const action2 = { 
+    //   type: 'TOGGLE_FORM'
+    // }
+    // dispatch(action2);
+    const { dispatch } = this.props; 
+    const action = a.addProduct(newProduct);
+    dispatch(action);
+    const action2 = a.toggleForm();
+    dispatch(action2);
   }
 
   handleChangingSelectedProduct = (id) => {
-    const selectedProduct = this.state.mainProductList.filter(product => product.id === id)[0];
+    const selectedProduct = this.props.mainProductList[id];
     this.setState({
       selectedProduct: selectedProduct
     });
@@ -72,13 +110,12 @@ class ProductControl extends React.Component {
   handleClick = () => {
     if (this.state.selectedProduct != null) {
       this.setState({
-        formVisibleOnPage: false,
         selectedProduct: null
       });
     } else {
-      this.setState(prevState => ({
-        formVisibleOnPage: !prevState.formVisibleOnPage,
-      }));
+      const { dispatch } = this.props; 
+      const action = a.toggleForm()
+      dispatch(action);
     }
   }
 
@@ -101,12 +138,12 @@ class ProductControl extends React.Component {
       />
       buttonText = "Return to Product List";
     }
-    else if (this.state.formVisibleOnPage) {
+    else if (this.props.formVisibleOnPage) {
       currentlyVisibleState = <NewProductForm onNewProductCreation = {this.handleAddingNewProductToList}  />;
       buttonText = "Return to Product List";
     } else{
       currentlyVisibleState = <ProductList 
-      productList={this.state.mainProductList} 
+      productList={this.props.mainProductList} 
       onProductSelection={this.handleChangingSelectedProduct}
       onBuyingProduct = {this.handleBuyingProduct} />;
       buttonText = "Add Product";
@@ -129,8 +166,20 @@ class ProductControl extends React.Component {
       </React.Fragment>
     );
   }
-  
 }
 
+ProductControl.propTypes = {
+  mainProductList: PropTypes.object,
+  formVisibleOnPage: PropTypes.bool
+};
+
+const mapStateToProps = state => {
+  return {
+    mainProductList: state.mainProductList,
+    formVisibleOnPage: state.formVisibleOnPage
+  }
+}
+
+ProductControl = connect(mapStateToProps)(ProductControl);
 
 export default ProductControl;

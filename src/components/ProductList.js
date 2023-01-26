@@ -10,8 +10,9 @@ function ProductList(props) {
         <div class = "columns is-centered">
           <div class = "column">
                   <h1 class = "title is-1">Product List</h1>
-                  {props.productList.length > 0       
-                  ? props.productList.map((product) => 
+                  {  
+                  Object.values(props.productList).length > 0   
+                  ? Object.values(props.productList).map((product) => 
                     <div class = "box">
                         <Product whenProductClicked = {props.onProductSelection}
                         name = {product.name}
@@ -34,7 +35,7 @@ function ProductList(props) {
 }
 
 ProductList.propTypes = {
-  productList: PropTypes.array,
+  productList: PropTypes.object,
   onProductSelection: PropTypes.func,
   onBuyingProduct: PropTypes.func
 };

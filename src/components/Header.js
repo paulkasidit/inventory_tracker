@@ -14,7 +14,7 @@ function Header(){
         </div>
         <div class = "column">
           <figure class="image is-96x96">
-            <img src = {buzzlogo} alt = "logo"/>
+           <a href = "#"><img src = {buzzlogo} alt = "logo"/></a> 
           </figure>
         </div>
       </div>
