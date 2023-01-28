@@ -2,7 +2,7 @@ import * as c from './../actions/ActionTypes';
 
 const reducer = (state = {}, action) => {
   
-  const {name , origin, price, roast, quantity, id} = action;
+  const {name, origin, price, roast, quantity, id, formattedWaitTime, timeAdded } = action;
   
   switch (action.type) {
 
@@ -21,9 +21,14 @@ const reducer = (state = {}, action) => {
       let newState = {...state};
       delete newState[id];
       return newState; 
+    case c.UPDATE_TIME: 
+      const newProduct = Object.assign({}, state[id], {formattedWaitTime});
+      const updatedState = Object.assign({}, state, {
+        [id]: newProduct
+      });
+      return updatedState;
     default:
-      return state;
-      
+      return state;   
   }
 };
 

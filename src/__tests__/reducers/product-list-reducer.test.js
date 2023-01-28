@@ -1,4 +1,5 @@
 import ProductListReducer from '../../reducers/product-list-reducer';
+import { formatDistanceToNow } from 'date-fns';
 import * as c from './../../actions/ActionTypes';
 
 describe('ProductListReducer', () => {
@@ -25,11 +26,35 @@ describe('ProductListReducer', () => {
     origin: "Australia",
     price: 3.00,
     roast: "Dark Roast",
+    timeAdded: new Date(),
+    formattedWaitTime: formatDistanceToNow(new Date(), {
+      addSuffix: true
+    }),
     id: 1
   };
 
+  test('Should add formatted elapsed product add time to each product entry',() => {
+    const {name, origin, price, roast, timeAdded, id} = productData; 
+    action = {
+      type: c.UPDATE_TIME,
+      formattedWaitTime: '4 minutes ago',
+      id: id
+    };
+    expect(ProductListReducer({[id]:productData}, action)).toEqual({
+      [id] : {
+        name: name,
+        origin: origin, 
+        price: price, 
+        roast: roast,
+        timeAdded: timeAdded,
+        id: id,
+        formattedWaitTime: '4 minutes ago'
+      }
+    });
+  });
+
   test("Should add new product data to mainProductList", () => {
-    const {name , origin, price, roast, id} = productData;
+    const {name, origin, price, roast, id} = productData;
     
     action = {
       type: c.ADD_PRODUCT, 
