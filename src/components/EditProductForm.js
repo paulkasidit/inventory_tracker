@@ -14,7 +14,9 @@ function EditProductForm(props){
       price: event.target.price.value, 
       roast: event.target.roast.value,
       quantity: product.quantity,
-      id: product.id
+      id: product.id,
+      timeAdded: product.timeAdded, 
+      formattedWaitTime: product.formattedWaitTime
     });
   }
 

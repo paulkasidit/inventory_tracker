@@ -21,6 +21,7 @@ function ProductList(props) {
                         roast = {product.roast}
                         quantity = {product.quantity}
                         onBuy = {props.onBuyingProduct} 
+                        formattedWaitTime = {product.formattedWaitTime}
                         id = {product.id}
                         key = {product.id}      
                         />

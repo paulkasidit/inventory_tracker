@@ -6,6 +6,7 @@ import NewProductForm from './NewProductForm';
 import EditProductForm from './EditProductForm'
 import ProductDetail from './ProductDetail';
 import ProductList from './ProductList';
+import { formatDistanceToNow } from 'date-fns';
 
 class ProductControl extends React.Component {
 
@@ -15,6 +16,28 @@ class ProductControl extends React.Component {
       selectedProduct: null,
       editing: false
     };
+  }
+
+  componentDidMount(){
+    this.waitTimeUpdateTimer = setInterval(() => 
+      this.updatedProductElapsedWaitTime(), 
+      60000
+      );
+  }
+
+  componentWillUnmount(){
+    clearInterval(this.waitTimeUpdateTimer);
+  }
+
+  updatedProductElapsedWaitTime = () => {
+    const { dispatch } = this.props; 
+    Object.values(this.props.mainProductList).forEach(product => {
+      const newFormattedWaitTime = formatDistanceToNow(product.timeAdded, {
+        addSuffix: true
+      });
+      const action = a.updateTime(product.id, newFormattedWaitTime);
+      dispatch(action);
+    });
   }
 
   handleEditinProductInList = (productToEdit) => {

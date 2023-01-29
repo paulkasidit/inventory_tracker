@@ -14,7 +14,9 @@ const reducer = (state = {}, action) => {
           price: price, 
           roast: roast,
           quantity: quantity,
-          id: id
+          id: id,
+          timeAdded: timeAdded,
+          formattedWaitTime: formattedWaitTime
         }
       });
     case c.DELETE_PRODUCT:

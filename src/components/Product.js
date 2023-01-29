@@ -30,7 +30,8 @@ Product.propTypes = {
   roast: PropTypes.string, 
   quantity: PropTypes.number,
   whenProductClicked: PropTypes.func,
-  onBuy: PropTypes.func
+  onBuy: PropTypes.func,
+  formattedWaitTime: PropTypes.string
 };
 
 

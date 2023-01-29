@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types"; 
 import ReusableForm from "./ReusableForm";
 import { v4 } from 'uuid'; 
+import { formatDistance, formatDistanceToNow } from 'date-fns';
 
 function NewProductForm(props){
   
@@ -13,7 +14,11 @@ function NewProductForm(props){
       price: event.target.price.value,
       roast: event.target.roast.value,
       quantity: 130,
-      id: v4()
+      id: v4(),
+      timeAdded: new Date(),
+      formattedWaitTime: formatDistanceToNow( new Date (), {
+        addSuffix: true
+      })
     });
   }
 

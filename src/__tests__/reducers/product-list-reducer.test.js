@@ -133,4 +133,31 @@ describe('ProductListReducer', () => {
     });
   });
 
+  test("Should successfully add a ticket to the ticket list that includes date-fns-formatted wait times",() => {
+    const {name, origin, price, roast, quantity, id, formattedWaitTime, timeAdded } = productData;
+    action = { 
+      type: c.ADD_PRODUCT, 
+      name: name, 
+      origin: origin,
+      price: price, 
+      roast: roast, 
+      quantity: quantity,
+      formattedWaitTime: formattedWaitTime,
+      timeAdded: timeAdded,
+      id: id 
+    };
+    expect(ProductListReducer({},action)).toEqual({
+      [id]: {
+        name: name, 
+        origin: origin, 
+        price: price, 
+        roast: roast, 
+        quantity: quantity,
+        formattedWaitTime: "less than a minute ago",
+        timeAdded: timeAdded,
+        id: id
+      }
+    })
+  });
+
 });
